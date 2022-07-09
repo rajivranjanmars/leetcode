@@ -84,7 +84,8 @@ struct Node {
 int intersectPoint(Node* head1, Node* head2)
 {
     // Your Code Here
-        Node* curr1 = head1;
+     // Your Code Here
+    Node* curr1 = head1;
     Node* curr2 = head2;
     //Storing last nodes of two linked list
     while(curr1->next) curr1 = curr1->next;
@@ -118,6 +119,6 @@ int intersectPoint(Node* head1, Node* head2)
         if(curr1 == curr2) return curr1->data;
         else return -1; //else
     }
-    else return curr->data;
+    else return curr->data; 
 }
 
