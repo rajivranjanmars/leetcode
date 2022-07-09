@@ -21,7 +21,7 @@ struct Node {
 class Solution
 {
     public:
- Node *copyList(Node *head)
+Node *copyList(Node *head)
     {
         Node* temp=head;
         Node* ansHead=NULL,*ans;
@@ -55,6 +55,7 @@ class Solution
         }
         return ansHead;
     }
+
 };
 
 // { Driver Code Starts.
