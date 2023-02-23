@@ -11,31 +11,19 @@
  */
 class Solution {
 public:
-   int maxSum(TreeNode* root, int& ans) {
-    
-    if(root == NULL){
-        return 0;
+ int solve(TreeNode* root,int& mx){
+        if(!root) return 0;
+        
+        int left=max(0,solve(root->left,mx));
+        int right=max(0,solve(root->right,mx));
+        int currVal=root->val;
+        
+        mx=max(mx,left+right+currVal);
+        return max(left,right)+currVal;
     }
-  
-    int leftBS = root->val + maxSum( root->left , ans );
-    int rightBS = root->val + maxSum( root->right , ans );
-    
-    ans = max({
-                ans,            //we may have found the maximum ans already
-                root->val,      //may be the current root val is the maximum sum possible
-                leftBS,         //may be the answer contain root->val + left branch value
-                rightBS,        //may be the answer contain root->val + right branch value
-                leftBS + rightBS - root->val   // may be ans conatin left branch + right branch + root->val
-                                               // Since the root val is added twice from leftBS and rightBS so we are sunstracting it.
-            });
-    
-    //Return the max branch Sum
-    return max({ leftBS , rightBS , root->val });
-}
-
-int maxPathSum(TreeNode* root) {
-    int ans = INT_MIN;
-    maxSum(root, ans);
-    return ans;
-}
+    int maxPathSum(TreeNode* root) {
+        int mx=INT_MIN;
+        solve(root,mx);
+        return mx;
+    }
 };
