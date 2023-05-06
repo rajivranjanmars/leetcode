@@ -1,26 +1,31 @@
 class Solution {
 public:
     vector<vector<int>> threeSum(vector<int>& nums) {
-        vector<vector<int>> ans;
         sort(nums.begin(), nums.end());
-        int n = nums.size();
-        for (int i = 0; i < n - 2; i++) {
-            if (i == 0 || (i > 0 && nums[i] != nums[i-1])) {
-                int l = i + 1, r = n - 1, sum = 0 - nums[i];
-                while (l < r) {
-                    if (nums[l] + nums[r] == sum) {
-                        ans.push_back({nums[i], nums[l], nums[r]});
-                        while (l < r && nums[l] == nums[l+1]) l++;
-                        while (l < r && nums[r] == nums[r-1]) r--;
-                        l++; r--;
-                    } else if (nums[l] + nums[r] < sum) {
-                        l++;
-                    } else {
-                        r--;
-                    }
-                }
-            }
+        if (nums.size() < 3) {
+            return {};
         }
-        return ans;
+        if (nums[0] > 0) {
+            return {};
+        }
+        unordered_map<int, int> hashMap;
+        for (int i = 0; i < nums.size(); ++i) {
+            hashMap[nums[i]] = i;
+        }
+        vector<vector<int>> answer;
+        for (int i = 0; i < nums.size() - 2; ++i) {
+            if (nums[i] > 0) {
+                break;
+            }
+            for (int j = i + 1; j < nums.size() - 1; ++j) {
+                int required = -1 * (nums[i] + nums[j]);
+                if (hashMap.count(required) && hashMap.find(required)->second > j) {
+                    answer.push_back({nums[i], nums[j], required});
+                }
+                j = hashMap.find(nums[j])->second;
+            }
+            i = hashMap.find(nums[i])->second;
+        }
+        return answer;
     }
 };
