@@ -9,4 +9,4 @@ Browse a problem directory for its solution and notes. Use the original problemâ
 
 ## Author
 
-[rajivranjanmars](https://rajivranjana.in)
+[Rajiv Ranjan](https://rajivranjan.in)
